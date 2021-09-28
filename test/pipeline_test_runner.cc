@@ -465,9 +465,7 @@ TEST_CASE("PerPhaseTest") { // NOLINT
                 continue;
             }
             auto diag = errorToDiagnostic(*gs, *error);
-            if (diag == nullptr) {
-                continue;
-            }
+            ENFORCE(diag != nullptr, "Error with header {} was given no location", error->header);
             auto path = error->loc.file().data(*gs).path();
             diagnostics[string(path.begin(), path.end())].push_back(std::move(diag));
         }
